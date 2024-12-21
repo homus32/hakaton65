@@ -65,6 +65,7 @@ export default defineNuxtConfig({
 				'Button',
 				'Select',
 				'RadioButton',
+				'Divider',
 			],
 		},
 		options: {
