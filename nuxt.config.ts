@@ -57,14 +57,15 @@ export default defineNuxtConfig({
 	},
 	primevue: {
 		directives: {
-			include: ['Ripple', 'Tooltip']
+			include: ['Ripple']
 		},
+		autoImport: false,
 		components: {
 			include: [
 				'Button',
-				'DatePicker',
 				'Select',
-			]
+				'RadioButton',
+			],
 		},
 		options: {
 			ripple: true,

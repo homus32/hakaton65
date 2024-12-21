@@ -37,7 +37,9 @@ const getTrackLabels = (track: Track): Label[] => {
 	<div class="w-full p-4 my-2 bg-gray-50 rounded-md shadow-md">
 		<div class="flex items-center mb-4">
 			<div class="flex items-center gap-3">
-				<div class="w-8 h-8 rounded-full flex items-center justify-center text-white font-medium bg-black">
+				<div class="w-8 h-8 rounded-full flex items-center justify-center text-white font-medium"
+							:style="`background-color: ${track.params.color}`"
+				>
 					{{ track.number }}
 				</div>
 				<h1 class="text-xl font-medium">{{ track.name }}</h1>

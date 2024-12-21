@@ -33,9 +33,9 @@ onMounted(() => {
 					ref="contentRef"
 					class="overflow-hidden transition-[max-height] duration-300 ease-in-out"
 					:style="{
-          maxHeight: isExpanded
-            ? `${contentRef?.scrollHeight || 1000}px`
-            : (typeof maxHeight === 'number' ? `${maxHeight}px` : maxHeight)
+          maxHeight: !isExpanded
+            ? (typeof maxHeight === 'number' ? `${maxHeight}px` : maxHeight)
+            : 'none'
         }"
 			>
 				<slot></slot>
