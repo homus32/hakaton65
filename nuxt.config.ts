@@ -1,5 +1,6 @@
-import { definePreset } from '@primevue/themes';
+import {definePreset} from '@primevue/themes';
 import Aura from '@primevue/themes/aura';
+
 const MyPreset = definePreset(Aura, {
 	semantic: {
 		primary: {
@@ -24,7 +25,8 @@ export default defineNuxtConfig({
 	devtools: {enabled: true},
 	modules: [
 		'@primevue/nuxt-module',
-		'@nuxtjs/google-fonts'
+		'@nuxtjs/google-fonts',
+		'@pinia/nuxt',
 	],
 	googleFonts: {
 		families: {

@@ -8,20 +8,38 @@ const props = defineProps<Props>();
 const contentRef = ref<HTMLElement | null>(null);
 const showFade = ref(false);
 const isExpanded = ref(false);
+const contentHeight = ref<number>(0);
 
 onMounted(() => {
 	const checkOverflow = () => {
-		if (contentRef.value && props.maxHeight && !isExpanded.value) {
+		if (contentRef.value && props.maxHeight) {
 			const maxHeightValue = typeof props.maxHeight === 'number'
 					? props.maxHeight
 					: parseInt(props.maxHeight);
 
-			showFade.value = contentRef.value.scrollHeight > maxHeightValue;
+			contentHeight.value = contentRef.value.scrollHeight;
+			showFade.value = contentHeight.value > maxHeightValue;
 		}
+	}
+
+	// Создаем MutationObserver для отслеживания изменений в контенте
+	const observer = new MutationObserver(checkOverflow);
+
+	if (contentRef.value) {
+		observer.observe(contentRef.value, {
+			childList: true,
+			subtree: true,
+			characterData: true
+		});
 	}
 
 	checkOverflow();
 	window.addEventListener('resize', checkOverflow);
+
+	onUnmounted(() => {
+		observer.disconnect();
+		window.removeEventListener('resize', checkOverflow);
+	});
 });
 </script>
 
@@ -33,10 +51,10 @@ onMounted(() => {
 					ref="contentRef"
 					class="overflow-hidden transition-[max-height] duration-300 ease-in-out"
 					:style="{
-          maxHeight: !isExpanded
-            ? (typeof maxHeight === 'number' ? `${maxHeight}px` : maxHeight)
-            : 'none'
-        }"
+						maxHeight: !isExpanded
+							? (typeof maxHeight === 'number' ? `${maxHeight}px` : maxHeight)
+							: `${contentHeight}px`
+					}"
 			>
 				<slot></slot>
 			</div>
@@ -53,7 +71,7 @@ onMounted(() => {
 					/>
 				</div>
 				<Button
-						class="px-6 py-2 !bg-white text-black shadow-lg !absolute bottom-5"
+						class="px-6 py-2 bg-white shadow-lg !absolute bottom-5"
 						text
 						rounded
 						@click="isExpanded = true"
@@ -65,10 +83,10 @@ onMounted(() => {
 			<!-- Кнопка "Скрыть" -->
 			<div
 					v-if="isExpanded"
-					class="flex justify-center"
+					class="flex justify-center mt-4"
 			>
 				<Button
-						class="px-6 py-2 !bg-white text-black shadow-lg"
+						class="px-6 py-2 bg-white shadow-lg"
 						text
 						rounded
 						@click="isExpanded = false"
@@ -86,7 +104,6 @@ onMounted(() => {
 }
 
 :deep(.p-button.p-button-text:enabled:hover) {
-	background: rgba(0, 0, 0, 0.04);
 	color: black;
 }
 </style>

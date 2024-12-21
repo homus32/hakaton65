@@ -1,4 +1,4 @@
-export interface Params {
+export interface TrackParams {
 	length: string;
 	time?: string;
 	height: string;
@@ -10,12 +10,12 @@ export interface Params {
 export interface Track {
 	name: string;
 	number: string;
-	params: Params;
+	params: TrackParams;
 	status: string;
 	updated_at: string;
 }
 
-export interface Label {
+export interface TrackLabel {
 	icon: string;
 	text: string;
 }
