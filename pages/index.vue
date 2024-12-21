@@ -6,7 +6,7 @@
 	<Holder header="Погода">
 		<Weather />
 	</Holder>
-	<Holder header="Трассы">
+	<Holder header="Трассы" max-height="24rem">
 		<TracksView/>
 	</Holder>
 </template>

@@ -13,3 +13,8 @@ export interface Track {
 	status: string;
 	updated_at: string;
 }
+
+export interface Label {
+	icon: string;
+	text: string;
+}
