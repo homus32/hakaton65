@@ -1,8 +1,8 @@
 <script setup lang="ts">
-// Определяем входящие параметры
 defineProps<{
 	header: string
 }>()
+
 </script>
 
 <template>

@@ -264,7 +264,7 @@ export default {
 						"params": {
 							"length": "2830 м",
 							"time": "11:00 — 17:00",
-							"height": "395 м",
+							"height": "395 cм",
 							"lighting": null,
 							"snow": null
 						},

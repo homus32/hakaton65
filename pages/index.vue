@@ -7,6 +7,6 @@
 		<Weather />
 	</Holder>
 	<Holder header="Трассы">
-		<Tracks/>
+		<TracksView/>
 	</Holder>
 </template>

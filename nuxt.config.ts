@@ -77,5 +77,5 @@ export default defineNuxtConfig({
 			},
 		},
 	},
-	css: ["~/main.css"]
+	css: ["~/main.css", "primeicons/primeicons.css"]
 })
