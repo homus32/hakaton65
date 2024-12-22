@@ -1,10 +1,22 @@
 <script setup lang="ts">
 import type {Track, TrackLabel} from '~/utils/types';
 
-defineProps<{
-	track: Track
+interface Props {
+	track: Track;
+	active?: boolean; // Добавляем prop для активного состояния
+}
+
+const props = defineProps<Props>();
+const emit = defineEmits<{
+	'select': [trackNumber: number] // Определяем emit события выбора трассы
 }>();
 
+// Обработчик клика по карточке
+const handleClick = () => {
+	emit('select', Number(props.track.number));
+};
+
+// Добавить Emit который возвращает track: int - если пользователь нажал на карточку надо вернуть track.number в эмите
 const getTrackLabels = (track: Track): TrackLabel[] => {
 	const labels: TrackLabel[] = [];
 
@@ -34,7 +46,14 @@ const getTrackLabels = (track: Track): TrackLabel[] => {
 </script>
 
 <template>
-	<div class="w-full p-4 my-2 bg-gray-50 rounded-md shadow-md">
+	<div
+			class="w-full p-4 my-2 rounded-md shadow-md cursor-pointer transition-colors"
+			:class="[
+      active ? 'bg-sky-100' : 'bg-gray-50',
+      'hover:bg-sky-100'
+    ]"
+			@click="handleClick"
+	>
 		<div class="flex items-center mb-4">
 			<div class="flex items-center gap-3">
 				<div class="w-8 h-8 rounded-full flex items-center justify-center text-white font-medium"

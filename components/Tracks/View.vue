@@ -3,12 +3,15 @@ import type { Track } from '~/utils/types';
 
 const hills = ref(tracks.data().map(hill => ({
 	name: hill.name,
+	url: hill.url, // Добавляем URL в данные
 	data: hill.tracks as Track[],
 })));
 
 const selectedHill = ref(hills.value[0]);
 const selectedDiff = ref<string>();
 const selectedStatus = ref<string>();
+const activeTrack = ref<number>(parseInt(hills.value[0].data[0].number)); // Добавляем состояние для активной трассы
+
 
 type DifficultyColors = {
 	easy: string;
@@ -64,10 +67,28 @@ const filteredTracks = computed(() => {
 
 	return filtered;
 });
+
+
+// Обработчик выбора трассы
+const handleTrackSelect = (trackNumber: number) => {
+	activeTrack.value = trackNumber;
+	document.getElementById('map-view')?.scrollIntoView({
+		behavior: 'smooth', // плавная прокрутка
+		block: 'start'     // выравнивание по верхнему краю
+	});
+};
+
+const selectedMapUrl = computed(() => {
+	return selectedHill.value.url;
+});
 </script>
 
 <template>
-	<MapView/>
+	<!-- Передаем URL карты и номер активной трассы -->
+	<MapView
+			:map-link="selectedMapUrl"
+			:track="activeTrack"
+	/>
 	<div class="flex justify-center items-center flex-col">
 		<Select
 				v-model="selectedHill"
@@ -141,6 +162,8 @@ const filteredTracks = computed(() => {
 					v-for="track in filteredTracks"
 					:key="track.number"
 					:track="track"
+					:active="activeTrack === Number(track.number)"
+					@select="handleTrackSelect"
 			/>
 		</template>
 		<div v-else class="text-center py-8 text-gray-500">
