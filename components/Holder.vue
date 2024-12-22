@@ -76,7 +76,7 @@ onMounted(() => {
 						rounded
 						@click="isExpanded = true"
 				>
-					Показать все
+					Показать всё
 				</Button>
 			</div>
 

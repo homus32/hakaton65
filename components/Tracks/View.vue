@@ -67,6 +67,7 @@ const filteredTracks = computed(() => {
 </script>
 
 <template>
+	<MapView/>
 	<div class="flex justify-center items-center flex-col">
 		<Select
 				v-model="selectedHill"

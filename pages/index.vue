@@ -23,7 +23,7 @@ const menuItems = [
 	</Holder>
 	<MenuSliderView :items="menuItems"/>
 
-	<Holder header="Трассы" max-height="24rem">
+	<Holder header="Трассы" max-height="33rem">
 		<TracksView/>
 	</Holder>
 </template>
