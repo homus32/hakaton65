@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import type { Track } from '~/utils/types';
+import type {Track, TrackLabel} from '~/utils/types';
 
 defineProps<{
 	track: Track
 }>();
 
-const getTrackLabels = (track: Track): Label[] => {
-	const labels: Label[] = [];
+const getTrackLabels = (track: Track): TrackLabel[] => {
+	const labels: TrackLabel[] = [];
 
 	if (track.params.length) {
 		labels.push({ icon: 'arrows-h', text: track.params.length });
